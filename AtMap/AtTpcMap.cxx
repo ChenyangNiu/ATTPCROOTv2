@@ -17,7 +17,7 @@ using std::endl;
 #define cYELLOW "\033[1;33m"
 #define cNORMAL "\033[0m"
 
-AtTpcMap::AtTpcMap() : AtPadCoord(boost::extents[10240][3][2])
+AtTpcMap::AtTpcMap() : AtPadCoord(boost::extents[10240][3][2]) //[][][]???
 {
    Initialize();
 }

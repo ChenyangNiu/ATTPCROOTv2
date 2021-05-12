@@ -22,7 +22,7 @@ void unpack(int runNumber)
    
   //Set the mapping for the TPC
   TString scriptfile = "e12014_pad_mapping.xml";//"Lookup20150611.xml";
-  TString parameterFile = "ATTPC.e12014.par";
+  TString parameterFile = "ATTPC.e12014.par";//all fixed pars in this exp???
    
   //Set directories
   TString dir = gSystem->Getenv("VMCWORKDIR");
@@ -30,8 +30,10 @@ void unpack(int runNumber)
   TString geomDir   = dir + "/geometry/";
   gSystem -> Setenv("GEOMPATH", geomDir.Data());
   TString digiParFile = dir + "/parameters/" + parameterFile;
-  TString geoManFile  = dir + "/geometry/ATTPC_v1.1.root";
-
+  TString geoManFile  = dir + "/geometry/ATTPC_v1.1.root";//v1.1???; 1.0 for ATTPC; 1.2 for pATTPC
+  // 1.1 he 1bar
+  //  ATTPC_He1bar.C
+  
 
   //Create a run
   FairRunAna* run = new FairRunAna();
@@ -78,11 +80,11 @@ void unpack(int runNumber)
   HDFParserTask->SetAuxChannel(hash, "MCP_DS");
   hash = HDFParserTask->CalculateHash(10,0,2,34);
   HDFParserTask->SetAuxChannel(hash, "IC");
-
+  //where is the mapping of these channels???
 
   AtPSASimple2 *psa = new AtPSASimple2();
-  psa -> SetThreshold(0); //0, 50
-  psa -> SetMaxFinder();
+  psa -> SetThreshold(100);// Y-channel of PSD from run_eve.C???
+  psa -> SetMaxFinder();//???
 
 
 //Create PSA task
@@ -108,7 +110,7 @@ void unpack(int runNumber)
   auto numEvents = HDFParserTask->GetNumEvents()/2;
 
   //numEvents = 1700;//217;
-  //numEvents = 10;
+  numEvents = 10;
   
   std::cout << "Unpacking " << numEvents << " events. " << std::endl;
 

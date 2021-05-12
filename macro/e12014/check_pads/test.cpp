@@ -1,4 +1,11 @@
-void drawPadPlane(int tpcRun = 200)
+void print(std::vector <int> const &a) {
+   std::cout << "The vector elements are : ";
+
+   for(int i=0; i < a.size(); i++)
+   std::cout << a.at(i) << ' ';
+}
+
+void test(int tpcRun = 200)
 {
   
   TChain tpc_tree("cbmsim");
@@ -42,11 +49,16 @@ void drawPadPlane(int tpcRun = 200)
     }
   }
   std::cout << "Done with loop" << endl;
-  fPadPlane->Draw("COL L0");
-  fPadPlane -> Draw("COL L0");
-  fPadPlane -> SetMinimum(1.0);
-  gStyle->SetOptStat(0);
-  gStyle->SetPalette(103);
-  gPad ->Update();
+  //fPadPlane->Draw("COL L0");
+  //fPadPlane -> Draw("COL L0");
+  // fPadPlane -> SetMinimum(1.0);
+  // gStyle->SetOptStat(0);
+  // gStyle->SetPalette(103);
+  // gPad ->Update();
+
+  auto ppp = fAtMapPtr->GetPadRef(9908);
+  print(ppp);
+
+  std::cout << "finish" << std::endl;
 
 }

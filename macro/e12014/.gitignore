@@ -1,0 +1,6 @@
+*.root
+*.h5
+
+# Chenyang sym link
+rootfiles
+rawfile

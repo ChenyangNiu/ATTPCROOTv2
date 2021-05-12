@@ -1,5 +1,10 @@
 void drawPadPlane(int tpcRun = 200)
 {
+  // create root file to write data
+  char outrootname[128];
+  sprintf(outrootname, "./plane_%04d.root", tpcRun);
+  TFile *outroot = new TFile(outrootname, "RECREATE");
+
   
   TChain tpc_tree("cbmsim");
   tpc_tree.Add(TString::Format("/mnt/analysis/e12014/TPC/unpacked/run_%04d.root", tpcRun));
@@ -48,5 +53,8 @@ void drawPadPlane(int tpcRun = 200)
   gStyle->SetOptStat(0);
   gStyle->SetPalette(103);
   gPad ->Update();
+
+  outroot->cd();
+  fPadPlane->Write();
 
 }
